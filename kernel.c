@@ -1,12 +1,12 @@
 char* vgaBuffer = (char*) 0xb8000; // screen buffer (VGA Text Mode)
 
-#define VGA_HEIGHT 80 // screen height
-#define VGA_WIDTH 25 // screen width
+#define VGA_HEIGHT 	80 // screen height
+#define VGA_WIDTH 	25 // screen width
 
 // We will come to this later
 void terminal_clear_screen(void);
 
-kernel_main()
+void kernel_main()
 {
 	terminal_clear_screen();
 	
@@ -20,33 +20,30 @@ kernel_main()
 	*/	 
 
 	vgaBuffer[0]  = 'H'; // First 8 bits: character
-	vgaBuffer[1]  =  79; // Last  8 bits: color
+	vgaBuffer[1]  =  0x0f; // Last  8 bits: color
 
 	vgaBuffer[2]  = 'e'; // First 8 bits: character
-	vgaBuffer[3]  =  15; // Last  8 bits: color
+	vgaBuffer[3]  =  0x0f; // Last  8 bits: color
 
 	vgaBuffer[4]  = 'l'; // and so on...
-	vgaBuffer[5]  =  10; 
+	vgaBuffer[5]  =  0x0a; 
 
 	vgaBuffer[6]  = 'l'; 
-	vgaBuffer[7]  =   4; 
-
+	vgaBuffer[7]  = 0x04; 
+ 
 	vgaBuffer[8]  = 'o'; 
-	vgaBuffer[9]  = 160; 
-
-	vgaBuffer[10] = '!';
-	vgaBuffer[11] =  64;
+	vgaBuffer[9]  = 0x06; 
 	
-	int vgaBufferPos = 12;
-	const char *message = " world!";
+	int vgaBufferPos = 10;
+	const char *message = " World...";
 	// Prints the message
 	int i = 0;
 	while (message[i] != '\0') {
 		vgaBuffer[vgaBufferPos] = message[i];
-		vgaBuffer[vgaBufferPos+1] = 15;
+		vgaBuffer[vgaBufferPos+1] = 0x0f;
 		
 		++i;
-		vgaBufferPos = vgaBufferPos + 2;
+		vgaBufferPos += 2;
 	}
 	
 	// Printing text in a practical way complicates the code a fair bit 
@@ -66,3 +63,4 @@ void terminal_clear_screen(void)
 		vgaBuffer[i] = 0;
 	}
 }
+
