@@ -23,12 +23,6 @@ iso: image
 	cp -a grub.cfg isodir/boot/grub/grub.cfg
 	grub-file --is-x86-multiboot isodir/boot/kernel.bin
 	grub-mkrescue -o myOS.iso -V "myOS" isodir
-	
-mbr: mbr.asm
-	nasm mbr.asm -o mbr.bin
-	
-run-mbr: mbr
-	qemu-system-i386 mbr.bin
 	 
 run-image: myOS.img
 	qemu-system-i386 -kernel myOS.img
