@@ -1,0 +1,7 @@
+/bootloader.o
+/isodir/boot/grub/grub.cfg
+/isodir/boot/kernel.bin
+/kernel.bin
+/kernel.o
+/myOS.img
+/myOS.iso
